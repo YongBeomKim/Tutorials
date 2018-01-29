@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.map_container{
+	float:left;
+	height: 200px;
+	width: 400px;
+	/* border: 1px  dotted green;  */
+	margin-right: 20px;
+} 
+.map_info{
+	position:relative;
+	float:left;
+	height: 200px;
+	width: 390px;
+	/* border: 1px  dotted green; */
+	padding-left: 5px;   
+} 
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC85Ykrjq0R-gfuRr-05BY--iG9DMhbA6Y&callback=myMap"></script>
+<script>
+function myMap() {
+	var mapOptions = {
+	    center: new google.maps.LatLng(37.498146, 127.027557), //강남역
+	    zoom: 16,
+	    mapTypeId: google.maps.MapTypeId.ROADMAP 
+	}
+	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+}
+</script>
+</head>
+
+<body onload="myMap()">
+<div class="map_container" id="map" style="width:300px;height:300px;background:yellow"></div>
+<div class="map_info">
+<h3>찾아오시는길</h3>
+지하철 이용 : 지하철 2호선, 신분당선 강남역 하차<br>
+버스 이용 : 146, 3600, 3100
+</div>
+</body>
+</html>

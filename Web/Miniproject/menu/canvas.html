@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+$(document).ready(function(){
+	var drawCanvas = document.getElementById('drawCanvas');
+	
+	var ctx = drawCanvas.getContext('2d');
+	var isDraw = false;
+	var width = $('#width').val();;
+	var color = $('#color').val();
+	var currP = null;
+
+	$('#width').bind('change', function(){ width = $('#width').val(); });
+	$('#color').bind('change', function(){ color = $('#color').val(); });
+
+	// Event (마우스)-------------------------------------------------------------
+	$('#drawCanvas').bind('mousedown', function(e) {
+		if (e.button===0) {
+			e.preventDefault();
+			ctx.beginPath();
+			isDraw = true;
+		}
+	});
+	$('#drawCanvas').bind('mousemove', function(e) {
+		var event = e.originalEvent;
+		e.preventDefault();
+		currP = { X:event.offsetX, Y:event.offsetY };
+		if(isDraw) 
+			draw_line(currP);
+	});
+	$('#drawCanvas').bind('mouseup', function(e) {
+		e.preventDefault();
+		isDraw = false;
+	});
+	
+	// 선 그리기------------------------------------------------------------
+	function draw_line(p) {
+		ctx.lineWidth = width;
+		ctx.lineCap = 'round';
+		ctx.lineTo(p.X, p.Y);
+		ctx.moveTo(p.X, p.Y);
+		ctx.strokeStyle = color;
+		ctx.stroke();
+	}
+	
+	// 지우기---------------------------------------------------------------
+	$('#btnClear').click(function() {
+		ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+		ctx.beginPath();
+		localStorage.removeItem('imgCanvas');
+	});
+});
+</script>
+</head>
+<body>
+<div>
+	<div align="center">
+		<canvas id="drawCanvas" width="320" height="180" style="border:1px solid #000000;">Canvas not supported</canvas>
+	</div>
+	<div align="center">
+		<select id="width">
+			<option value="1" selected>1px</option>
+			<option value="2">2px</option>
+			<option value="3">3px</option>
+			<option value="5">5px</option>
+			<option value="10">10px</option>
+			<option value="20">20px</option>
+		</select>
+		<select id="color">
+			<option value="#FFFFFF">흰색</option>
+			<option value="#FF0000">빨강</option>
+			<option value="#F29661">주황</option>
+			<option value="#FFFF00">노랑</option>
+			<option value="#00FF00">녹색</option>
+			<option value="#0000FF">파랑</option>
+			<option value="#003399">남색</option>
+			<option value="#990085">보라</option>
+			<option value="#000000" selected>검정</option>
+			
+		</select>
+		<button id="btnClear">지우기</button>
+	</div>
+</div>
+</body>
+</html>

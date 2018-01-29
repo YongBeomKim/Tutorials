@@ -1,0 +1,5 @@
+[{"id":"abcd","pw":"1234","name":"kim","point":"2500"},
+{"id":"admin","pw":"5678","name":"lee","point":"5400"},
+{"id":"sony","pw":"2323","name":"park","point":"3200"},
+{"id":"candy","pw":"7777","name":"kang","point":"1000"},
+{"id":"jenni","pw":"9090","name":"hong","point":"500"}]

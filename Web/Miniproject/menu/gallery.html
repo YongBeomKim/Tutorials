@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+<style>
+.divimg{
+	float:left;
+	width: 100px;
+	margin-right: 30px;
+}
+/* .gallery_container{
+	margin: 0 auto;
+	float:left;
+	width: 500px;
+	height: 300px;
+	border: 1px dotted green; 
+	padding-left: 10px;  
+}   */
+</style>
+<script>
+$(document).ready(function(){
+	$('#img1').click(function(){
+	    $('.gallery_container').html(
+				"<img src='../image/pic1.jpg' style='width:450px; height:250px'/>"); 
+	});
+	$('#img2').click(function(){
+	    $('.gallery_container').html(
+				"<img src='../image/pic2.jpg' style='width:450px; height:250px'/>"); 
+	});
+	$('#img3').click(function(){
+	    $('.gallery_container').html(
+				"<img src='../image/pic3.jpg' style='width:450px; height:250px'/>"); 
+	});
+});
+</script>
+</head>
+<body>
+<div class="divimg">
+	<img src="../image/pic1.jpg" id="img1" width="50px" height="50px"/><br>
+	<img src="../image/pic2.jpg" id="img2" width="50px" height="50px"/><br>
+	<img src="../image/pic3.jpg" id="img3" width="50px" height="50px"/>
+</div>	
+<div class="gallery_container"></div>
+</body>
+</html>

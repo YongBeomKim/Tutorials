@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+h1{
+	width: 100%;
+	text-align: center;
+	color: white;
+	text-shadow: 1px 1px 2px #000000, 0 0 25px blue, 0 0 5px darkblue;
+}
+a{
+	text-decoration: none;
+}
+/* 머리 말  첫 메뉴*/
+.infoLink {
+	font-family: verdanar;
+	text-align: left;
+	margin-left: auto;
+}
+
+.infoLink  li {
+	color: #8080ff;
+	display: inline-block;
+}
+
+.infoLink a {
+	display: inline-block;
+	color: #8080ff;
+	padding: 8px 0 7px 3px;
+}
+
+.infoLink a:before {
+	content: "|";
+	padding-right: 8px;
+}
+
+.infoLink :first-child a:before {
+	content: "";
+}
+
+
+img:hover{
+	opacity: .5;
+}
+#main_lnb{
+	margin: 0 auto;
+	width: 75%;
+	background-color: black;
+}
+#main_lnb > ul{
+	list-style: none;
+	height: 50px;
+	line-height:45px;
+	padding: 0;
+}
+#main_lnb > ul > li {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	float: left;
+	text-align: center;
+	width: 16.66%;
+	height: 100%;
+	
+}
+#main_lnb > ul > li:hover{
+	background-color: #868686;
+}
+a.mylink:link{
+	color: white;
+}
+a.mylink:visited{
+	color: white;
+}
+p{display: inline-block;}
+</style>
+<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+<style>
+.main_container{
+	margin: 0 auto;
+	width:70%;
+	height: 30%;
+	padding-left: 10px;
+	/* border:1px dotted red; */
+} 
+.main_memo{
+	margin: 0 auto;
+	width:70%;
+	height: 30%;
+	padding-left: 10px;
+	/* border:1px dotted red; */
+} 
+</style>
+<script>
+$(document).ready(function(){
+	
+	//배경화면 롤링------------------------------------------------
+	$('.main_container').load("demoRolling.html");
+	
+	//로컬저장소에 있는 메모 가져오기------------------------------------
+	$('.main_memo').hide();
+	msg=document.getElementById("txtBox");
+	msg.value=localStorage.getItem("memo");
+	
+	//홈페이지 소개---------------------------------------------------
+	$("#intro").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/intro.html");
+	});
+	
+	//갤러리------------------------------------------------------
+	$("#gallery").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/gallery.html");
+	});
+	
+	//영화보기------------------------------------------------------
+	$("#movie").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/movie.html");
+	}); 
+	
+	//간단한 그림판-------------------------------------------------------
+	$("#canvas").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/canvas.html");
+	});
+	
+	//찾아오시는길--------------------------------------------------
+	$("#mymap").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/mymap.html");
+	});
+	
+	//로그인화면------------------------------------------------------
+	$("#login").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/login.html");
+	});
+	
+	//회원가입------------------------------------------------------
+	$("#register").click(function(){
+		$(".main_memo").hide();
+		$('.main_container').show().load("menu/register.html");
+	});
+	
+	//오늘의 메모-----------------------------------------------------
+	$("#memo").click(function(){
+		$(".main_container").hide();
+		$(".main_memo").show();
+	});
+	
+	$("#txtBox").keyup(function(){
+		info = document.getElementById("info");
+	    info.style.display = "block";
+	    localStorage.setItem("memo", msg.value);
+	});
+	
+	$("#txtBox").keydown(function(){
+		info = document.getElementById("info");
+	    info.style.display = "block";
+	    localStorage.setItem("memo", msg.value);
+	});
+	
+	$("#clr").click(function(){
+		msg.value = "";
+	    localStorage.clear();
+	    info.style.display = "none";
+	});
+	
+	$("#clr").keyup(function(){
+		msg.value = "";
+	    localStorage.clear();
+	    info.style.display = "none";
+	});
+});
+</script>
+</head>
+
+<body>
+<header id="header">
+	<h1 id="title">JavaScript &amp; D3.js</h1>
+	<nav id="header_nav">
+		<!-- 헤더 상단 메뉴 클릭-->
+		<ul class="infoLink">
+			<li><a href="">홈</a></li>
+			<li><a id="memo" href="#">오늘의메모</a></li>
+		</ul>
+	</nav>
+</header>
+<nav id="main_lnb">
+ 	<ul>
+ 		<li><a id="intro" href="#" class="mylink">D3소개</a></li>
+ 		<li><a id="gallery" href="#" class="mylink">갤러리</a></li>
+ 		<li><a id="movie" href="#" class="mylink">영화보기</a></li>
+ 		<li><a id="canvas" href="#" class="mylink">간단한 그림판</a></li>
+ 		<li><a id="mymap" href="#" class="mylink">찾아오시는길</a></li>
+ 		<li><a id="login" href="#" class="mylink">로그인</a></li>
+ 	</ul>
+</nav>
+
+<div class="main_container"></div>
+<div class="main_memo">
+<h4>*중요한 메모를 기록하세요*</h4>
+   <textarea id="txtBox" cols="50" rows="5"></textarea>
+   <br><br>
+   <input type="button" value="메모지 비우기" id="clr"/>
+   <p id="info" style="display:none;">메모내용이 자동 저장되었습니다.</P>
+</div>
+</body>
+</html>
